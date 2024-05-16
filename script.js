@@ -119,20 +119,16 @@ function optionSelected(answer) {
         answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
         console.log("Correct Answer");
         console.log("Your correct answers = " + userScore);
-    } else if(userAns != correcAns){
+    } else if (userAns != correcAns) {
         answer.classList.add("incorrect"); //adding red color to correct selected option
         answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
         console.log("Wrong Answer");
-        restartQuiz();
-        window.location.href = "paginacasoapessoaerre.html";
-    } else{
-        for(i = 0; i < allOptions; i++) {
+    } else {
+        for (i = 0; i < allOptions; i++) {
             if (option_list.children[i].textContent == correcAns) { //if there is an option which is matched to an array answer 
                 option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
                 option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
                 console.log("Auto selected correct answer.");
-                alert("Reiniciando.....Tente ser mais rápido da próxima vez, meu consagrado!!");
-                window.location.href = "paginacasoapessoaerre.html";
             }
         }
     }
@@ -147,13 +143,12 @@ function showResult() {
     quiz_box.classList.remove("activeQuiz"); //hide quiz box
     result_box.classList.add("activeResult"); //show result box
     const scoreText = result_box.querySelector(".score_text");
-    if (userScore > 5) { // if user scored more than 3
-        //creating a new span tag and passing the user score number and total question number
+    if (userScore > 4) {
         let scoreTag = '<span>parabéns! , Você acertou <p>' + userScore + '</p> de <p>' + questions.length + '</p></span>';
         scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
     }
-    else if (userScore > 3) { // if user scored more than 1
-        let scoreTag = '<span>Boa!! Acertou <p>' + userScore + '</p> de <p>' + questions.length + '</p></span>';
+    else if (userScore == 3) { // if user scored more than 1
+        let scoreTag = '<span>Metade dos acertos!! É alguma coisa! Acertou <p>' + userScore + '</p> de <p>' + questions.length + '</p></span>';
         scoreText.innerHTML = scoreTag;
     }
     else { // if user scored less than 1
@@ -174,6 +169,8 @@ function startTimer(time) {
         if (time < 0) { //if timer is less than 0
             clearInterval(counter); //clear counter
             timeText.textContent = "Tempo acabou!"; //change the time text to time off
+            alert("Reiniciando.....Tente ser mais rápido da próxima vez, meu consagrado!!");
+            window.location.href = "paginacasoapessoademoredemais.html";
             const allOptions = option_list.children.length; //getting all option items
             let correcAns = questions[que_count].answer; //getting correct answer from array
             for (i = 0; i < allOptions; i++) {
